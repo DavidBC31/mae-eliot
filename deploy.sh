@@ -13,6 +13,10 @@ echo "🚀 Starting deployment process..."
 echo "⚠️  Make sure you have the latest code from GitHub before deploying!"
 echo ""
 
+# Create necessary directories
+echo "📁 Creating necessary directories..."
+mkdir -p /volume1/docker/mae-eliot/mongodb_data
+
 # Stop and remove existing containers
 echo "🛑 Stopping existing containers..."
 sudo docker stop mae-eliot-frontend mae-eliot-backend mae-eliot-mongodb 2>/dev/null || true
@@ -35,6 +39,12 @@ sudo docker run -d \
   -p 27017:27017 \
   --restart unless-stopped \
   mongo:4.4
+
+# Vérifier que MongoDB a bien démarré
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ MongoDB failed to start!${NC}"
+    exit 1
+fi
 
 echo "⏳ Waiting for MongoDB to be ready..."
 sleep 10
