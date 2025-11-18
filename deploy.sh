@@ -49,7 +49,8 @@ sudo docker run -d \
   --network mae-eliot-network \
   -p 8001:8001 \
   -e MONGO_URL="mongodb://mae-eliot-mongodb:27017/mae_eliot" \
-  -e JWT_SECRET="your-super-secret-jwt-key-change-this-in-production" \
+  -e DB_NAME="mae_eliot" \
+  -e SECRET_KEY="your-super-secret-jwt-key-change-this-in-production" \
   --restart unless-stopped \
   mae-eliot-backend:latest
 
