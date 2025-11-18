@@ -425,6 +425,30 @@ async def delete_rituel(id: str, current_user: dict = Depends(get_current_user))
     await db.rituels.delete_one({"_id": id, "user_id": current_user["_id"]})
     return {"message": "Deleted"}
 
+# Dé 10 - Listes thématiques
+@api_router.get("/de10lists")
+async def get_de10lists(current_user: dict = Depends(get_current_user)):
+    lists = await db.de10lists.find({"user_id": current_user["_id"]}).to_list(1000)
+    return lists
+
+@api_router.post("/de10lists")
+async def create_de10list(de10list: De10List, current_user: dict = Depends(get_current_user)):
+    list_dict = de10list.dict()
+    list_dict["_id"] = str(uuid.uuid4())
+    list_dict["user_id"] = current_user["_id"]
+    await db.de10lists.insert_one(list_dict)
+    return list_dict
+
+@api_router.put("/de10lists/{id}")
+async def update_de10list(id: str, de10list: De10List, current_user: dict = Depends(get_current_user)):
+    await db.de10lists.update_one({"_id": id, "user_id": current_user["_id"]}, {"$set": de10list.dict()})
+    return {"message": "Updated"}
+
+@api_router.delete("/de10lists/{id}")
+async def delete_de10list(id: str, current_user: dict = Depends(get_current_user)):
+    await db.de10lists.delete_one({"_id": id, "user_id": current_user["_id"]})
+    return {"message": "Deleted"}
+
 # Include the router in the main app
 app.include_router(api_router)
 
