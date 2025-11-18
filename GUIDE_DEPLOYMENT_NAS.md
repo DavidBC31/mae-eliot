@@ -1,6 +1,8 @@
 # Guide Complet de Déploiement sur NAS
 ## Application Mae & Eliot - BDSM Tracker
 
+**✅ Workflow GitHub → NAS → Production configuré!**
+
 ---
 
 ## 📋 Table des Matières
