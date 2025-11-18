@@ -8,15 +8,10 @@ NC='\033[0m' # No Color
 
 echo "🚀 Starting deployment process..."
 
-# Pull latest changes from GitHub
-echo "🔄 Pulling latest changes from GitHub..."
-git pull origin main
-if [ $? -ne 0 ]; then
-    echo -e "${RED}❌ Git pull failed! Check for conflicts.${NC}"
-    exit 1
-fi
-
-echo -e "${GREEN}✅ Code updated successfully${NC}"
+# Note: Make sure you've manually pulled the latest changes before running this script
+# Run: git pull origin main (or your branch name)
+echo "⚠️  Make sure you have the latest code from GitHub before deploying!"
+echo ""
 
 # Stop and remove existing containers
 echo "🛑 Stopping existing containers..."
