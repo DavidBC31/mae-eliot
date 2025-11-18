@@ -124,6 +124,10 @@ class De10Option(BaseModel):
     number: int
     text: str
 
+class De10List(BaseModel):
+    name: str
+    items: List[str] = Field(default_factory=lambda: [""] * 10)
+
 class Rituel(BaseModel):
     number: int
     text: str
