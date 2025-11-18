@@ -3,11 +3,14 @@ FROM node:18 as build
 
 WORKDIR /app
 
-# Copier package.json et yarn.lock
-COPY package.json yarn.lock ./
+# Copier package.json
+COPY package.json ./
 
-# Installer les dépendances
-RUN yarn install --frozen-lockfile
+# Copier yarn.lock si présent, sinon on le générera
+COPY yarn.loc[k] ./ 2>/dev/null || true
+
+# Installer les dépendances (génère yarn.lock si absent)
+RUN yarn install
 
 # Copier le reste du code
 COPY . .
